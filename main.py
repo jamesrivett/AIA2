@@ -23,6 +23,7 @@ def fillInit():
                 used.append(num)
                 break
 
+#calculates num's distance to its goal position
 def calculateDistance(num):
     numpos = []
     goalpos = []
@@ -56,6 +57,7 @@ def calculateDistance(num):
     distance = abs(numpos[0] - goalpos[0]) + abs(numpos[1] - goalpos[1])
     return distance
 
+#calculate distance of all nums out of place
 def totalDistance():
     sum = 0
 
