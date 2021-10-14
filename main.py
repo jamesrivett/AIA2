@@ -72,6 +72,15 @@ def totalDistance():
 
     return sum
 
+def goalState():
+    isGoalState = True
+    for i in range(3):
+        for j in range(3):
+            if init[i][j] != goal [i][j]:
+                isGoalState = False
+    
+    return isGoalState
+
 
 #main
 def main():
@@ -79,6 +88,7 @@ def main():
     for i in range(3):
         print(str(init[i]) + " " + str(goal[i]))
     print(totalDistance())
+    print(goalState())
 
 if __name__ == "__main__":
     main()
