@@ -59,7 +59,6 @@ def calculateDistance(num):
 def totalDistance():
     sum = 0
 
-    sum += calculateDistance(0)
     sum += calculateDistance(1)
     sum += calculateDistance(2)
     sum += calculateDistance(3)
@@ -77,7 +76,7 @@ def main():
     fillInit()
     for i in range(3):
         print(str(init[i]) + " " + str(goal[i]))
-    print(calculateDistance(1))
+    print(totalDistance())
 
 if __name__ == "__main__":
     main()
