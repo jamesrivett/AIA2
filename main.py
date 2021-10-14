@@ -4,6 +4,7 @@ import random
 goal = [[1, 2, 3],[8, 0, 4],[7, 6, 5]]
 init = [[0, 0, 0],[0, 0, 0],[0, 0, 0]]
 
+#fills init list with distinct random values from 0 to 8
 def fillInit():
     used = []
     for i in range(3):
@@ -11,8 +12,6 @@ def fillInit():
             while True:
                 cont = False
                 num = random.randint(0, 8)
-                print(used)
-                print(num)
 
                 for element in used:
                     if element == num:
