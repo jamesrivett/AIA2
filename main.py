@@ -82,15 +82,20 @@ def goalState():
     
     return isGoalState
 
-def possMoves():
-    zeropos = []
-    moves = []
-
-    #find position of zero
+#find position of zero
+def findZero():
     for i in range(3):
         for j in range(3):
             if init[i][j] == 0:
                 zeropos = [i, j]
+    return zeropos
+
+
+def possMoves():
+    zeropos = []
+    moves = []
+
+    zeropos = findZero()
 
     #all moves possible if in middle
     if zeropos == [1, 1]:
@@ -121,6 +126,73 @@ def possMoves():
 
     return moves
 
+def up():
+    zeropos = findZero()
+    row = zeropos[0]
+    col = zeropos[1]
+    if row == 0:
+        print("can't move up from here!")
+        return
+
+    temp = init[row - 1][col]
+    init[row - 1][col] = init[row][col]
+    init[row][col] = temp
+
+
+def down():
+    zeropos = findZero()
+    row = zeropos[0]
+    col = zeropos[1]
+    if row == 2:
+        print("can't move down from here!")
+        return
+
+    temp = init[row + 1][col]
+    init[row + 1][col] = init[row][col]
+    init[row][col] = temp
+    
+def left():
+    zeropos = findZero()
+    row = zeropos[0]
+    col = zeropos[1]
+    if row == 2:
+        print("can't move left from here!")
+        return
+
+    temp = init[row][col - 1]
+    init[row][col - 1] = init[row][col]
+    init[row][col] = temp
+
+def right():
+    zeropos = findZero()
+    try:
+        row = zeropos[0]
+        col = zeropos[1]
+        temp = init[row][col + 1]
+        init[row][col + 1] = init[row][col]
+        init[row][col] = temp
+    except:
+        print("can't move right from here!")
+        return
+
+#calculate costs for moves
+def moveCost(moves):
+    costs = [[] for r in range(len(moves))]
+    for move in moves:
+        if move == "up":
+            up()
+        if move == "down":
+            down()
+        if move == "left":
+            left()
+        if move == "right":
+            right()
+    
+    return costs
+
+
+
+
 
 #main
 def main():
@@ -130,6 +202,9 @@ def main():
     print(totalDistance())
     print(goalState())
     print(possMoves())
+    right()
+    for i in range(3):
+        print(str(init[i]) + " " + str(goal[i]))
 
 if __name__ == "__main__":
     main()
