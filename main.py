@@ -1,8 +1,9 @@
 import random
+import time
 
 #globals
 goal = [[1, 2, 3],[8, 0, 4],[7, 6, 5]]
-init = [[0, 0, 0],[0, 0, 0],[0, 0, 0]]
+init = [[1, 2, 3],[8, 0, 4],[7, 6, 5]]
 
 #print current state and goal position
 def printBoard():
@@ -28,6 +29,24 @@ def fillInit():
                 init[i][j] = num
                 used.append(num)
                 break
+
+def scramble(amt):
+    print("Scrambling board by " + str(amt) + " random moves")
+    for i in range(amt):
+        move = random.randint(0, 3)
+
+        if move == 0:
+            moveSuccess = up()
+            if not moveSuccess: i += 1
+        if move == 1:
+            moveSuccess = down()
+            if not moveSuccess: i += 1
+        if move == 2:
+            moveSuccess = left()
+            if not moveSuccess: i += 1
+        if move == 3:
+            moveSuccess = right()
+            if not moveSuccess: i += 1
 
 #calculates num's distance to its goal position
 def calculateDistance(num):
@@ -97,30 +116,40 @@ def findZero():
     return zeropos
 
 #calculate possible moves
-def possMoves():
+def possMoves(last):
     zeropos = []
     moves = []
     zeropos = findZero()
+    print("last move: " + last)
 
     #calculate possible vertical moves
-    if zeropos[0] == 0:
+    if zeropos[0] == 0 and last != "up":
         moves.append("down")
+
     if zeropos[0] == 1:
-        moves.append("up")
-        moves.append("down")
-    if zeropos[0] == 2:
+        if last != "down":
+            moves.append("up")
+        if last != "up":
+            moves.append("down")
+
+    if zeropos[0] == 2 and last != "down":
         moves.append("up")
 
 
     #calculate possible horizontal moves
-    if zeropos[1] == 0:
+    if zeropos[1] == 0 and last != "left":
         moves.append("right")
+
     if zeropos[1] == 1:
-        moves.append("left")
-        moves.append("right")
-    if zeropos[1] == 2:
+        if  last != "right":
+            moves.append("left")
+        if  last != "left":
+            moves.append("right")
+
+    if zeropos[1] == 2 and last != "right":
         moves.append("left")
 
+    print("possible moves: " + str(moves))
     return moves
 
 #calculate costs for moves
@@ -138,7 +167,6 @@ def moveCost(moves):
             costs[i].append("down")
             costs[i].append(totalDistance())
             up()
-
         if moves[i] == "left":
             left()
             costs[i].append("left")
@@ -160,11 +188,12 @@ def up():
     col = zeropos[1]
     if row == 0:
         print("can't move up from here!")
-        return
+        return False
 
     temp = init[row - 1][col]
     init[row - 1][col] = init[row][col]
     init[row][col] = temp
+    return True
 
 def down():
     zeropos = findZero()
@@ -172,43 +201,46 @@ def down():
     col = zeropos[1]
     if row == 2:
         print("can't move down from here!")
-        return
+        return False
 
     temp = init[row + 1][col]
     init[row + 1][col] = init[row][col]
     init[row][col] = temp
+    return True
     
 def left():
     zeropos = findZero()
     row = zeropos[0]
     col = zeropos[1]
-    if row == 2:
+    if col == 0:
         print("can't move left from here!")
-        return
+        return False
 
     temp = init[row][col - 1]
     init[row][col - 1] = init[row][col]
     init[row][col] = temp
+    return True
 
 def right():
     zeropos = findZero()
-    try:
-        row = zeropos[0]
-        col = zeropos[1]
-        temp = init[row][col + 1]
-        init[row][col + 1] = init[row][col]
-        init[row][col] = temp
-    except:
+    row = zeropos[0]
+    col = zeropos[1]
+    if col == 2:
         print("can't move right from here!")
-        return
+        return False
+
+    temp = init[row][col + 1]
+    init[row][col + 1] = init[row][col]
+    init[row][col] = temp
+    return True
 # }
 
 #Best First Search Function | Each funcion call is one step
-def bfs():
+def bfs(last):
     printBoard()
     lowestCost = 100
     lowestMove = "none"
-    costs = moveCost(possMoves())
+    costs = moveCost(possMoves(last))
 
     #find move with lowest cost
     for i in range(len(costs)):
@@ -216,26 +248,36 @@ def bfs():
             lowestCost = costs[i][1]
             lowestMove = costs[i][0]
 
+    print("moving to: " + lowestMove)
+
     #make move with lowest cost
     if lowestMove == "up":
         up()
-        return
+        return "up"
     if lowestMove == "down":
         down()
-        return
+        return "down"
     if lowestMove == "left":
         left()
-        return
+        return "left"
     if lowestMove == "right":
         right()
-        return
+        return "right"
         
 
 #main
 def main():
-    fillInit()
+    lastMove = ""
+    scramble(20)
+    print("BEGIN")
+    print("-----------------------------------")
+    totalMoves = 0
+
     while not goalState():
-        bfs()
+        lastMove = bfs(lastMove)
+        totalMoves += 1
+
+    print("Finished! Total Moves: " + str(totalMoves))
 
 if __name__ == "__main__":
     main()
