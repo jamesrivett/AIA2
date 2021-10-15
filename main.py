@@ -72,6 +72,7 @@ def totalDistance():
 
     return sum
 
+#returns false until init matches goal state
 def goalState():
     isGoalState = True
     for i in range(3):
@@ -81,6 +82,45 @@ def goalState():
     
     return isGoalState
 
+def possMoves():
+    zeropos = []
+    moves = []
+
+    #find position of zero
+    for i in range(3):
+        for j in range(3):
+            if init[i][j] == 0:
+                zeropos = [i, j]
+
+    #all moves possible if in middle
+    if zeropos == [1, 1]:
+        moves.append("up")
+        moves.append("down")
+        moves.append("left")
+        moves.append("right")
+        return moves
+
+    #calculate possible vertical moves
+    if zeropos[0] == 0:
+        moves.append("down")
+    if zeropos[0] == 1:
+        moves.append("up")
+        moves.append("down")
+    if zeropos[0] == 2:
+        moves.append("up")
+
+
+    #calculate possible horizontal moves
+    if zeropos[1] == 0:
+        moves.append("right")
+    if zeropos[1] == 1:
+        moves.append("left")
+        moves.append("right")
+    if zeropos[1] == 2:
+        moves.append("left")
+
+    return moves
+
 
 #main
 def main():
@@ -89,6 +129,7 @@ def main():
         print(str(init[i]) + " " + str(goal[i]))
     print(totalDistance())
     print(goalState())
+    print(possMoves())
 
 if __name__ == "__main__":
     main()
