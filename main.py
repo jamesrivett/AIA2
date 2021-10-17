@@ -269,6 +269,7 @@ def bfs(last, state):
 
 # main
 def main():
+    '''
     lastMove = ""
     scramble(20, init)
     printBoard(init)
@@ -284,6 +285,13 @@ def main():
     print("-----------------------------------")
     print("Finished! Total Moves: " + str(totalMoves))
     print("-----------------------------------")
+    '''
+
+    scramble(20, init)
+    printBoard(init)
+    n0 = node.node(init, "")
+    for child in n0.getChildren():
+        print(child)
     
 
 if __name__ == "__main__":
