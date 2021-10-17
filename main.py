@@ -290,9 +290,7 @@ def main():
     scramble(20, init)
     printBoard(init)
     n0 = node.node(init, "")
-    for child in n0.getChildren():
-        print(child)
-    
+
 
 if __name__ == "__main__":
     main()
