@@ -12,36 +12,31 @@ class node:
         self.children = self.findChildren()
         self.lastMove = last
 
-    # calculates poss moves and costs, DOES NOT RETURN LIST OF CHILDREN
+    # calculates poss moves and costs, DOES NOT RETURN sellf.children
     def findChildren(self):
         moves = possMoves(self.lastMove, self.state)
+        kids = []
 
         # makes move, stores as child, then reverts
         for move in moves:
-            print(move)
-            kids = []
             if move == "up":
-                print("went: " + move)
                 up(self.state)
+                print(self.state)
                 kids.append([self.state, totalDistance(self.state)])
                 down(self.state)
             if move == "down":
-                print("went: " + move)
                 down(self.state)
                 kids.append([self.state, totalDistance(self.state)])
                 up(self.state)
             if move == "left":
-                print("went: " + move)
                 left(self.state)
                 kids.append([self.state, totalDistance(self.state)])
                 right(self.state)
             if move == "right":
-                print("went: " + move)
                 right(self.state)
                 kids.append([self.state, totalDistance(self.state)])
                 left(self.state)
 
-        print(kids)
         return kids
 
     # RETURNS LIST OF CHILDREN
