@@ -266,6 +266,10 @@ def bfs(last, state):
         right(state)
         return "right"
         
+def ucs(state):
+    head = node.node(state, "")
+
+    
 
 # main
 def main():
