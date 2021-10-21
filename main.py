@@ -291,6 +291,7 @@ def main():
     printBoard(init)
     n0 = node.node(init, "", "")
     print(n0.getChildren())
+    print(n0.findLowestChild())
 
 
 if __name__ == "__main__":
