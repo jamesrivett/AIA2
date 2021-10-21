@@ -13,7 +13,13 @@ class node:
         self.state = state
         self.children = self.findChildren()
         self.lastMove = last
-        self.pathTo.append(path)
+        if last == "":
+            self.pathTo.append(state)
+        else:
+            self.pathTo.append(path)
+
+    def getPathTo(self):
+        return self.pathTo
 
     # calculates poss moves and costs, DOES NOT RETURN sellf.children
     def findChildren(self):
@@ -45,8 +51,15 @@ class node:
 
         return kids
 
-    def getPathTo(self):
-        return self.pathTo
+    def findLowestChild(self):
+        lowest = [[], 100000]
+
+        for child in self.children:
+            if child[1] < lowest[1]:
+                lowest = child
+
+        return lowest
+
 
     # RETURNS LIST OF CHILDREN
     def getChildren(self):

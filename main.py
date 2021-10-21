@@ -289,7 +289,7 @@ def main():
 
     scramble(20, init)
     printBoard(init)
-    n0 = node.node(init, "")
+    n0 = node.node(init, "", "")
     print(n0.getChildren())
 
 
