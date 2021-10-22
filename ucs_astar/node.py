@@ -89,7 +89,6 @@ class node:
     def calcTotalCost(self):
         sum = 0
         for n in self.pathTo:
-            print(n.getCost())
             sum += n.getCost()
         return sum
 
@@ -102,6 +101,7 @@ class node:
         temp = self.state[row - 1][col]
         self.state[row - 1][col] = self.state[row][col]
         self.state[row][col] = temp
+        self.zeroPos = self.getZeroPos()
     def down(self):
         row = self.zeroPos[0]
         col = self.zeroPos[1]
@@ -110,6 +110,7 @@ class node:
         temp = self.state[row + 1][col]
         self.state[row + 1][col] = self.state[row][col]
         self.state[row][col] = temp
+        self.zeroPos = self.getZeroPos()
     def left(self):
         row = self.zeroPos[0]
         col = self.zeroPos[1]
@@ -118,6 +119,7 @@ class node:
         temp = self.state[row][col - 1]
         self.state[row][col - 1] = self.state[row][col]
         self.state[row][col] = temp
+        self.zeroPos = self.getZeroPos()
     def right(self):
         row = self.zeroPos[0]
         col = self.zeroPos[1]
@@ -126,6 +128,7 @@ class node:
         temp = self.state[row][col + 1]
         self.state[row][col + 1] = self.state[row][col]
         self.state[row][col] = temp
+        self.zeroPos = self.getZeroPos()
 
     # returns result of movement functions
     def getUp(self):

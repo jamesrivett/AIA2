@@ -7,11 +7,11 @@ def main():
     init = node.node([[1, 2, 3],[8, 0, 4],[7, 6, 5]], [])
 
     n0 = init.getUp()
-    print("went")
+    print(n0.getState())
     n1 = n0.getRight()
-    print("went")
+    print(n1.getState())
     n2 = n1.getDown()
-    print("went")
+    print(n2.getState())
     print(init.calcTotalCost())
 
 
