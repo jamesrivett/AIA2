@@ -1,3 +1,5 @@
+import copy
+
 class node:
     state = []
     cost = 0
@@ -103,24 +105,24 @@ class node:
     def down(self):
         row = self.zeroPos[0]
         col = self.zeroPos[1]
-        if row == 0:
-            raise Exception("can't move up from here!")
+        if row == 2:
+            raise Exception("can't move down from here!")
         temp = self.state[row + 1][col]
         self.state[row + 1][col] = self.state[row][col]
         self.state[row][col] = temp
     def left(self):
         row = self.zeroPos[0]
         col = self.zeroPos[1]
-        if row == 0:
-            raise Exception("can't move up from here!")
+        if col == 0:
+            raise Exception("can't move left from here!")
         temp = self.state[row][col - 1]
         self.state[row][col - 1] = self.state[row][col]
         self.state[row][col] = temp
     def right(self):
         row = self.zeroPos[0]
         col = self.zeroPos[1]
-        if row == 0:
-            raise Exception("can't move up from here!")
+        if col == 2:
+            raise Exception("can't move right from here!")
         temp = self.state[row][col + 1]
         self.state[row][col + 1] = self.state[row][col]
         self.state[row][col] = temp
@@ -129,7 +131,7 @@ class node:
     def getUp(self):
         try:
             self.up()
-            temp = self.state
+            temp = copy.deepcopy(self.state)
             self.down()
             return node(temp, self.pathTo)
         except Exception as e:
@@ -137,7 +139,7 @@ class node:
     def getDown(self):
         try:
             self.down()
-            temp = self.state
+            temp = copy.deepcopy(self.state)
             self.up()
             return node(temp, self.pathTo)
         except Exception as e:
@@ -145,16 +147,16 @@ class node:
     def getLeft(self):
         try:
             self.left()
-            temp = self.state
+            temp = copy.deepcopy(self.state)
             self.right()
             return node(temp, self.pathTo)
         except Exception as e:
             raise e
     def getRight(self):
         try:
-            self.up()
-            temp = self.state
-            self.down()
+            self.right()
+            temp = copy.deepcopy(self.state)
+            self.left()
             return node(temp, self.pathTo)
         except Exception as e:
             raise e
