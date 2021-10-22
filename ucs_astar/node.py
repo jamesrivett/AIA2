@@ -35,6 +35,12 @@ class node:
                     zeropos = [i, j]
         return zeropos
 
+    def isGoal(self):
+        if self.state == [[1, 2, 3],[8, 0, 4],[7, 6, 5]]:
+            return True
+        else:
+            return False
+
     def calcCost(self):
         # calculates num's distance to its goal position
         def calculateDistance(num, state):
