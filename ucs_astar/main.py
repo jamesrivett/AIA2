@@ -6,9 +6,10 @@ def main():
     goal = node.node([[1, 2, 3],[8, 0, 4],[7, 6, 5]], [])
     init = node.node([[1, 2, 3],[8, 0, 4],[7, 6, 5]], [])
 
-    print(init.getState())
-    init.right()
-    print(init.getState())
+    n0 = init.getUp()
+    n1 = n0.getRight()
+    n2 = n1.getDown()
+    print(init.calcTotalCost())
 
 
 def scramble(node):
