@@ -265,15 +265,9 @@ def bfs(last, state):
     if lowestMove == "right":
         right(state)
         return "right"
-        
-def ucs(state):
-    head = node.node(state, "")
-
     
-
 # main
 def main():
-    '''
     lastMove = ""
     scramble(20, init)
     printBoard(init)
@@ -289,13 +283,6 @@ def main():
     print("-----------------------------------")
     print("Finished! Total Moves: " + str(totalMoves))
     print("-----------------------------------")
-    '''
-
-    scramble(20, init)
-    printBoard(init)
-    n0 = node.node(init, "", "")
-    print(n0.getChildren())
-    print(n0.findLowestChild())
 
 
 if __name__ == "__main__":
