@@ -1,5 +1,4 @@
 import random
-import node
 
 # globals
 goal = [[1, 2, 3],[8, 0, 4],[7, 6, 5]]
