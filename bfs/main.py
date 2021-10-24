@@ -36,16 +36,16 @@ def scramble(amt, state):
 
         if move == 0:
             moveSuccess = up(state)
-            if not moveSuccess: i += 1
+            if not moveSuccess: i -= 1
         if move == 1:
             moveSuccess = down(state)
-            if not moveSuccess: i += 1
+            if not moveSuccess: i -= 1
         if move == 2:
             moveSuccess = left(state)
-            if not moveSuccess: i += 1
+            if not moveSuccess: i -= 1
         if move == 3:
             moveSuccess = right(state)
-            if not moveSuccess: i += 1
+            if not moveSuccess: i -= 1
 
 # calculates num's distance to its goal position
 def calculateDistance(num, state):
