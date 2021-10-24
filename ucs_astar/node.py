@@ -41,6 +41,9 @@ class node:
         else:
             return False
 
+    def printState(self):
+        print(self.state)
+
     def calcCost(self):
         # calculates num's distance to its goal position
         def calculateDistance(num, state):
