@@ -1,3 +1,4 @@
+from typing import get_origin
 import node
 import random
 
@@ -5,6 +6,25 @@ def getChildren(node):
     zeroPos = node.getZeroPos()
     row = zeroPos[0]
     col = zeroPos[1]
+    children = []
+
+    if row == 0:
+        children.append(node.getDown())
+    if row == 1:
+        children.append(node.getDown())
+        children.append(node.getUp())
+    if row == 2:
+        children.append(node.getUp())
+    if col == 0:
+        children.append(node.getRight())
+    if col == 1:
+        children.append(node.getRight())
+        children.append(node.getLeft())
+    if col == 2:
+        children.append(node.getLeft())
+
+    return children
+
 
 def scramble(node, amt):
     for i in range(amt):
@@ -41,7 +61,9 @@ def main():
     init.printState()
 
     for current in allNodes:
-        getChildren(current)
+        children = getChildren(current)
+        for child in children:
+            child.printState()
 
 
 

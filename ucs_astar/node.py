@@ -42,7 +42,9 @@ class node:
             return False
 
     def printState(self):
-        print(self.state)
+        for row in self.state:
+            print(row)
+        print("")
 
     def calcCost(self):
         # calculates num's distance to its goal position
